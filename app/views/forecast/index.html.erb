@@ -1,0 +1,15 @@
+<h1>Weather Forecast</h1>
+<%= form_with url: forecast_index_path, method: :get, local: true do %>
+  <%= label_tag :address %>
+  <%= text_field_tag :address, params[:address] %>
+  <%= submit_tag "Get Forecast" %>
+<% end %>
+
+<% if @forecast %>
+  <h2>Forecast for <%= @location %> <% if @cached %>(cached)<% end %></h2>
+  <p>Temperature: <%= @forecast[:temp] %>°C</p>
+  <p>High: <%= @forecast[:temp_max] %>°C</p>
+  <p>Low: <%= @forecast[:temp_min] %>°C</p>
+<% elsif flash[:error] %>
+  <p style="color:red;"><%= flash[:error] %></p>
+<% end %>
